@@ -1,5 +1,5 @@
 FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs chromium-driver postgresql-client
 RUN mkdir /rails_atta
 WORKDIR /rails_atta
 COPY Gemfile /rails_atta/Gemfile
