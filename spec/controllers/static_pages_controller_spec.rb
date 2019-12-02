@@ -41,4 +41,16 @@ RSpec.describe StaticPagesController, type: :controller do
     end
   end
 
+  describe "GET #contact" do
+    before do
+      get :contact
+    end
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+    it "タイトルにContactが含まれる" do
+      expect(response.body).to have_title "Contact | #{ base_title }"
+    end
+  end
+
 end
