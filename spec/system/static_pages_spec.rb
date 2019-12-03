@@ -6,13 +6,15 @@ RSpec.describe "Static Pages", :type => :system do
   describe 'root' do
     it 'Home画面の表示' do
       visit '/'
-      expect(page).to have_title "Home | #{ base_title }"
+      expect(page).to have_title base_title
+      expect(page).to_not have_title "Home |"
     end
   end
   describe 'Home' do
     it '画面の表示' do
       visit '/static_pages/home'
-      expect(page).to have_title "Home | #{ base_title }"
+      expect(page).to have_title base_title
+      expect(page).to_not have_title "Home |"
     end
   end
   describe 'About' do
