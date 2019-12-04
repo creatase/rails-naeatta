@@ -9,13 +9,12 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     /![if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script><![endif]
   body
-    header.navbar.navbar-fixed-top.navbar-inverse
-      div.container
-        = link_to "naeatta", '#', id: "logo"
-        nav
-          ul.nav.navbar-nav.navbar-right
-            li = link_to "Home", '#'
-            li = link_to "Help", '#'
-            li = link_to "Log in", '#'
+    header.d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
+      = link_to "naeatta", '#', id: "logo", class: "my-0 mr-md-auto font-weight-normal"
+      nav.my-2.my-md-0.mr-md-3
+        = link_to "Home", '#', class: "p-2 text-dark"
+        = link_to "About", '#', class: "p-2 text-dark"
+        = link_to "Help", '#', class: "p-2 text-dark"
+      = link_to "ログイン", '#', class: "btn btn-outline-primary"
     div.container
       = yield
