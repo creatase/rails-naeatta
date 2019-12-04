@@ -112,6 +112,27 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    describe 'password password_confirmationが' do
+      context '空文字のとき' do
+        it 'パスしない' do
+          user.password = user.password_confirmation = ' ' * 6
+          expect(user.valid?).to be_falsey
+        end
+      end
+      context '5文字以下のとき' do
+        it 'パスしない' do
+          user.password = user.password_confirmation = 'a' * 5
+          expect(user.valid?).to be_falsey
+        end
+      end
+      context '6文字以上のとき' do
+        it 'パスする' do
+          user.password = user.password_confirmation = 'a' * 6
+          expect(user.valid?).to be_truthy
+        end
+      end
+    end
   end
 
   describe '登録内容' do
