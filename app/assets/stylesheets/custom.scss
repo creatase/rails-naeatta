@@ -1,7 +1,13 @@
 @import "bootstrap";
 
-/* universal */
+$gray-base: #000;
+$gray: lighten($gray-base, 33.5%);
+$gray-light: lighten($gray-base, 46.7%);
+$gray-darker: lighten($gray-base, 13.5%);
 
+$gray-medium-light: #eaeaea;
+
+/* universal */
 section {
   overflow: auto;
 }
@@ -12,11 +18,11 @@ textarea {
 
 .center {
   text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
 }
 
-.center h1 {
-  margin-bottom: 10px;
-}
 
 /* typography */
 
@@ -37,7 +43,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #777;
+  color: $gray-light;
 }
 
 p {
@@ -55,9 +61,35 @@ p {
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+  &:hover {
+    color: lightgreen;
+    text-decoration: none;
+  }
 }
 
-#logo:hover {
-  color: lightgreen;
-  text-decoration: none;
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: $gray-light;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
 }
