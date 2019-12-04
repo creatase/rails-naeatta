@@ -15,12 +15,19 @@ RSpec.describe "Static Pages", type: :system do
     end
   end
 
-  describe 'root' do
-    it 'Home画面の表示' do
+  describe 'Home' do
+    before do
       visit '/'
-      expect(page).to have_title base_title
-      expect(page).to_not have_title "Home |"
+    end
+    context '画面を表示したとき' do
+      it 'titleは naeatta のみ' do
+        expect(page).to have_title base_title
+        expect(page).to_not have_title "Home |"
       end
+      it '新規登録のリンクがある' do
+        expect(page).to have_link '新規登録', href: signup_path
+      end
+    end
   end
   describe 'About' do
     it '画面の表示' do
