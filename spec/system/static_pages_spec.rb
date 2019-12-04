@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Static Pages", :type => :system do
+RSpec.describe "Static Pages", type: :system do
   let(:base_title) { 'naeatta' }
 
   describe 'root' do
