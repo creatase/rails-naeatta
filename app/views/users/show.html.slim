@@ -1,1 +1,7 @@
-= @user.name + ", " + @user.email
+- provide(:title, @user.name)
+div.row
+  aside.col-md-4
+    section.user_info
+      h1
+        = image_tag('/images/kuro.jpg', alt: @user.name, class: "gravatar", size: '60x60')
+        = @user.name
