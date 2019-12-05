@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # 保存の処理をここに書く
+      redirect_to @user
     else
       render 'new'
     end
