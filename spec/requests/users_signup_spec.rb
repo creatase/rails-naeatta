@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Users Signup", type: :request do
+
   example '無効な情報で登録に失敗すると登録画面を表示する' do
     get signup_path
     expect{
@@ -32,6 +33,6 @@ RSpec.describe "Users Signup", type: :request do
     expect(response).to redirect_to(user_path(user))
     follow_redirect!
     expect(is_logged_in?).to be_truthy
-
   end
+
 end
