@@ -10,9 +10,9 @@ RSpec.describe "Users Signup", type: :request do
           email: "user@invalid",
           password: "foo",
           password_confirmation: "bar"
-          }
         }
-      }.to change{ User.count }.by(0)
+      }
+    }.to change{ User.count }.by(0)
     expect(response).to render_template(:new)
   end
 
