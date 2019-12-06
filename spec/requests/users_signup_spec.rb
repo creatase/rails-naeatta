@@ -28,10 +28,10 @@ RSpec.describe "Users Signup", type: :request do
         }
       }
     }.to change{User.count}.by(1)
-    expect(response).to redirect_to(user_path(User.last))
+    user = User.last
+    expect(response).to redirect_to(user_path(user))
     follow_redirect!
-
-    expect(response).to render_template(:show)
+    expect(is_logged_in?).to be_truthy
 
   end
 end
