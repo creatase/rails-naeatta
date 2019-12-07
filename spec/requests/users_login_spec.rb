@@ -38,4 +38,15 @@ RSpec.describe "Users Login", type: :request do
     end
   end
 
+  describe 'ログイン状態' do
+    it '保持してログインするとクッキーに記憶トークンが保存される' do
+      log_in_as(user, remember_me: '1')
+      expect(response.cookies['remember_token']).to_not be_empty
+    end
+
+    it '保持せずにログインすると記憶トークンをクッキーに保存しない' do
+      log_in_as(user, remember_me: '0')
+      expect(response.cookies['remember_token']).to be_nil
+    end
+  end
 end
