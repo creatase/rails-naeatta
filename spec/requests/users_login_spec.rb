@@ -1,17 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Users Login", type: :request do
-
-  before do
-    post users_path, params: {
-      user: {
-        name: "Example User",
-        email: "user@example.com",
-        password: "password",
-        password_confirmation: "password"
-      }
-    }
-  end
+  let!(:user) { FactoryBot.create(:user) }
 
   example '無効な情報でログインに失敗するとログイン画面を表示する' do
     get login_path
@@ -31,20 +21,20 @@ RSpec.describe "Users Login", type: :request do
       expect(response).to render_template(:new)
       post login_path, params: {
         session: {
-          email: "user@example.com",
+          email: "michael@example.com",
           password: "password"
         }
       }
     end
 
     example '成功するとユーザー詳細画面を表示する' do
-      expect(response).to redirect_to(user_path(User.last))
+      expect(response).to redirect_to(user_path(user))
       follow_redirect!
       expect(response).to render_template(:show)
     end
 
     example 'ログアウトするとホーム画面を表示する' do
-      get user_path(User.last)
+      get user_path(user)
       expect(response).to render_template(:show)
 
       delete login_path
