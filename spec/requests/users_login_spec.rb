@@ -27,12 +27,12 @@ RSpec.describe "Users Login", type: :request do
       get user_path(user)
       expect(response).to render_template(:show)
 
-      delete login_path
+      delete logout_path
       expect(response).to redirect_to(root_path)
       follow_redirect!
       expect(response).to render_template(:home)
 
-      delete login_path
+      delete logout_path
       follow_redirect!
       expect(response).to render_template(:home)
     end
