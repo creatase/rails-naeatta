@@ -51,6 +51,10 @@ RSpec.describe "Users Login", type: :request do
       expect(response).to redirect_to(root_path)
       follow_redirect!
       expect(response).to render_template(:home)
+
+      delete login_path
+      follow_redirect!
+      expect(response).to render_template(:home)
     end
   end
 

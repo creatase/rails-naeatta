@@ -142,4 +142,10 @@ RSpec.describe User, type: :model do
       expect(user.reload.email).to eq 'foo@example.com'
     end
   end
+
+  describe '認証' do
+    it 'cookies[:remember_token]がnilの状態ではauthenticated?はfalseを返す' do
+      expect(user.authenticated?('')).to be_falsey
+    end
+  end
 end
