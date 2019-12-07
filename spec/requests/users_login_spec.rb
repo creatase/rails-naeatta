@@ -1,27 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "Users Login", type: :request do
-
-  before do
-    post users_path, params: {
-      user: {
-        name: "Example User",
-        email: "user@example.com",
-        password: "password",
-        password_confirmation: "password"
-      }
-    }
-  end
+  let!(:user) { FactoryBot.create(:user) }
 
   example '無効な情報でログインに失敗するとログイン画面を表示する' do
     get login_path
     expect(response).to render_template(:new)
-    post login_path, params: {
-      session: {
-        email: "user@invalid",
-        password: "foo"
-      }
-    }
+    log_in_as(user, email: "user@invalid", password: "foo")
     expect(response).to render_template(:new)
   end
 
@@ -29,29 +14,40 @@ RSpec.describe "Users Login", type: :request do
     before do
       get login_path
       expect(response).to render_template(:new)
-      post login_path, params: {
-        session: {
-          email: "user@example.com",
-          password: "password"
-        }
-      }
+      log_in_as(user)
     end
 
     example '成功するとユーザー詳細画面を表示する' do
-      expect(response).to redirect_to(user_path(User.last))
+      expect(response).to redirect_to(user_path(user))
       follow_redirect!
       expect(response).to render_template(:show)
     end
 
     example 'ログアウトするとホーム画面を表示する' do
-      get user_path(User.last)
+      get user_path(user)
       expect(response).to render_template(:show)
 
-      delete login_path
+      delete logout_path
       expect(response).to redirect_to(root_path)
+      follow_redirect!
+      expect(response).to render_template(:home)
+
+      delete logout_path
       follow_redirect!
       expect(response).to render_template(:home)
     end
   end
 
+  describe 'ログイン状態' do
+    it '保持してログインするとクッキーに記憶トークンが保存される' do
+      log_in_as(user, remember_me: '1')
+      expect(response.cookies['remember_token']).to_not be_empty
+      expect(response.cookies['remember_token']).to eq assigns(:user).remember_token
+    end
+
+    it '保持せずにログインすると記憶トークンをクッキーに保存しない' do
+      log_in_as(user, remember_me: '0')
+      expect(response.cookies['remember_token']).to be_nil
+    end
+  end
 end

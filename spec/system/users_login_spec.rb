@@ -26,18 +26,27 @@ RSpec.describe "Users Login", type: :system do
 
   describe '有効な情報でログインボタンを押下' do
 
-    it 'ユーザー詳細ページを表示する' do
-      user = FactoryBot.create(:user)
+    before do
+      @user = FactoryBot.create(:user)
       visit login_path
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: @user.password
       click_button 'ログイン'
+    end
 
-      expect(current_path).to eq user_path(user)
-      expect(page).to_not have_selector 'a', text: 'ログイン'
+    it 'ユーザー詳細ページを表示する' do
+      expect(current_path).to eq user_path(@user)
+      expect(page).to_not have_selector 'a', text: 'Log in'
       expect(page).to have_selector 'a', text: 'ログアウト'
       expect(page).to have_selector 'a', text: 'Profile'
+    end
 
+    it 'ログアウトボタンを押すとホーム画面を表示' do
+      click_link 'ログアウト'
+      expect(current_path).to eq root_path
+      expect(page).to have_selector 'a', text: 'Log in'
+      expect(page).to_not have_selector 'a', text: 'ログアウト'
+      expect(page).to_not have_selector 'a', text: 'Profile'
     end
 
   end
