@@ -6,12 +6,7 @@ RSpec.describe "Users Login", type: :request do
   example '無効な情報でログインに失敗するとログイン画面を表示する' do
     get login_path
     expect(response).to render_template(:new)
-    post login_path, params: {
-      session: {
-        email: "user@invalid",
-        password: "foo"
-      }
-    }
+    log_in_as(user, email: "user@invalid", password: "foo")
     expect(response).to render_template(:new)
   end
 
@@ -19,12 +14,7 @@ RSpec.describe "Users Login", type: :request do
     before do
       get login_path
       expect(response).to render_template(:new)
-      post login_path, params: {
-        session: {
-          email: "michael@example.com",
-          password: "password"
-        }
-      }
+      log_in_as(user)
     end
 
     example '成功するとユーザー詳細画面を表示する' do
