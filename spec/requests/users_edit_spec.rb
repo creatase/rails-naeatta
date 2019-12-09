@@ -69,4 +69,35 @@ RSpec.describe "Users Edit", type: :request do
       expect(response).to render_template(:new)
     end
   end
+
+  describe '異なるユーザーでログイン' do
+
+    before do
+      @user_a = FactoryBot.create(:user, name: 'user_a', email: 'user_a@mail.com')
+      @user_b = FactoryBot.create(:user, name: 'user_b', email: 'user_b@mail.com')
+      log_in_as(@user_a)
+    end
+
+    example '別ユーザーの編集ページへのアクセスはホーム画面へリダイレクトされる' do
+      get edit_user_path(@user_b)
+      expect(response).to redirect_to(root_path)
+      follow_redirect!
+      expect(response).to render_template(:home)
+    end
+
+    example '別ユーザー情報更新のpostはホーム画面へリダイレクトする' do
+      patch user_path(@user_b), params: {
+        user: {
+          name: name,
+          email: email,
+          password: '',
+          password_confirmation: ''
+        }
+      }
+      expect(response).to redirect_to(root_path)
+      follow_redirect!
+      expect(response).to render_template(:home)
+    end
+
+  end
 end

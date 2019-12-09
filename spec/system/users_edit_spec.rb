@@ -29,4 +29,22 @@ RSpec.describe "Users Edit", type: :system do
       expect(page).to have_content 'ログインしてください'
     end
   end
+
+  describe '異なるユーザーでログイン' do
+
+    example '別ユーザーの編集ページへのアクセスはホーム画面へリダイレクトされる' do
+      user_a = FactoryBot.create(:user, name: 'user_a', email: 'user_a@mail.com')
+      user_b = FactoryBot.create(:user, name: 'user_b', email: 'user_b@mail.com')
+      visit login_path
+      fill_in 'Email', with: user_a.email
+      fill_in 'Password', with: user_a.password
+      click_button 'ログイン'
+
+      visit edit_user_path(user_b)
+      expect(current_path).to eq root_path
+      expect(page).to_not have_css '.alert'
+    end
+
+  end
+
 end
