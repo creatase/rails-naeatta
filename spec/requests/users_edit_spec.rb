@@ -44,10 +44,6 @@ RSpec.describe "Users Edit", type: :request do
 
   describe 'ログアウト時' do
 
-    before do
-      delete logout_path
-    end
-
     example 'ユーザー編集画面へのアクセスはログイン画面へリダイレクトする' do
       get edit_user_path(user)
       expect(response).to redirect_to(login_path)
@@ -99,5 +95,27 @@ RSpec.describe "Users Edit", type: :request do
       expect(response).to render_template(:home)
     end
 
+  end
+
+  describe 'フレンドリーフォアーディング' do
+    example 'ログアウト状態で編集画面へアクセスしリダイレクトしたログイン画面でログインすると編集画面へリダイレクトする' do
+      get edit_user_path(user)
+      expect(response).to redirect_to login_path
+      follow_redirect!
+      log_in_as(user)
+      expect(response).to redirect_to edit_user_path(user)
+
+      delete logout_path
+      patch user_path(user), params: {
+        user: {
+          name: name,
+          email: email,
+          password: '',
+          password_confirmation: ''
+        }
+      }
+      log_in_as(user)
+      expect(response).to redirect_to user_path(user)
+    end
   end
 end
