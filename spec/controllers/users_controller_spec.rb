@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  let(:user) { FactoryBot.create(:user) }
 
   describe "GET #new" do
     it "returns http success" do
@@ -11,14 +12,19 @@ RSpec.describe UsersController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      user = User.new(
-        name: 'yukita',
-        email: 'yukita@mail.com',
-        password: 'password',
-        password_confirmation: 'password'
-      )
-      user.save!
       get :show, params: {id: user.id}
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "GET #index" do
+    it "returns http success" do
+      get :index
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(login_url)
+
+      log_in_as(user)
+      get :index
       expect(response).to have_http_status(:success)
     end
   end
