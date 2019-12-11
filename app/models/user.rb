@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
-  before_save { email.downcase! }
+  before_save :downcase_email
   validates :name,
             presence: true,
             length: { maximum: 50 }
@@ -43,4 +43,11 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  private
+
+    # メールアドレスを全て小文字にする
+    def downcase_email
+      email.downcase!
+    end
 end
