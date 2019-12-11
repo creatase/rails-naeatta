@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Users Edit", type: :request do
   let!(:user) { FactoryBot.create(:user) }
+  let(:other_user) { FactoryBot.create(:user, name: "Sterling Archer", email: "duchess@example.gov") }
   let(:name) { "Foo Bar" }
   let(:email) { "foo@bar.com" }
 
@@ -112,6 +113,22 @@ RSpec.describe "Users Edit", type: :request do
       }
       log_in_as(user)
       expect(response).to redirect_to user_path(user)
+    end
+  end
+
+  describe "admin属性" do
+    it "web経由では変更できない" do
+      log_in_as(other_user)
+      expect(other_user.admin?).to be_falsey
+
+      patch user_path(other_user), params: {
+        user: {
+          password: "",
+          password_confirmation: "",
+          admin: true,
+        },
+      }
+      expect(other_user.reload.admin?).to be_falsey
     end
   end
 end
