@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
@@ -12,7 +12,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show, params: {id: user.id}
+      get :show, params: { id: user.id }
       expect(response).to have_http_status(:success)
     end
   end
@@ -28,5 +28,4 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-
 end
