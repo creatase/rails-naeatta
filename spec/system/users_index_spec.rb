@@ -28,8 +28,10 @@ RSpec.describe "Users Index", type: :system do
       expect(page).to have_css ".pagination"
     end
 
-    example "各ユーザー詳細ページへのリンクと管理者意外のユーザーの削除リンクがある" do
+    example "有効化された各ユーザー詳細ページへのリンクと管理者意外のユーザーの削除リンクがある" do
       User.paginate(page: 1).each do |user|
+        next unless user.activated?
+
         expect(page).to have_selector "a", text: user.name
         unless user == @admin
           expect(page).to have_link "削除", href: user_path(user)

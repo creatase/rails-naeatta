@@ -3,6 +3,10 @@ require "rails_helper"
 RSpec.describe UsersController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
 
+  before do
+    user.update_attributes(activated: true, activated_at: Time.zone.now)
+  end
+
   describe "GET #new" do
     it "returns http success" do
       get :new
