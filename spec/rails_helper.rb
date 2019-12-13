@@ -74,4 +74,5 @@ RSpec.configure do |config|
   config.include IntegrationHelpers, type: :request
   config.include IntegrationHelpers, type: :helper
   config.include ControllerHelpers, type: :controller
+  config.include SystemHelpers, type: :system
 end
