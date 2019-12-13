@@ -6,6 +6,8 @@ RSpec.describe "Users Delete", type: :request do
 
   before do
     user.update_attribute(:admin, true)
+    activate(user)
+    activate(other_user)
   end
 
   it "ログアウトではログイン画面にリダイレクトされる" do

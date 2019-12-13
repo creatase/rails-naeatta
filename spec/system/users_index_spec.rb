@@ -3,12 +3,14 @@ require "rails_helper"
 RSpec.describe "Users Index", type: :system do
   before do
     @admin = FactoryBot.create(:user, name: "Michael Example", email: "michael@example.com")
+    activate(@admin)
     @non_admin = FactoryBot.create(:user, name: "Sterling Archer", email: "duchess@example.gov")
-    FactoryBot.create(:user, name: "Lana Kane", email: "hands@example.gov")
-    FactoryBot.create(:user, name: "Malory Archer", email: "boss@example.gov")
+    activate(@admin)
+    activate(FactoryBot.create(:user, name: "Lana Kane", email: "hands@example.gov"))
+    activate(FactoryBot.create(:user, name: "Malory Archer", email: "boss@example.gov"))
 
     30.times do |i|
-      FactoryBot.create(:user, name: "User #{i}", email: "user-#{i}@example.com")
+      activate(FactoryBot.create(:user, name: "User #{i}", email: "user-#{i}@example.com"))
     end
     @admin.update_attribute(:admin, true)
   end

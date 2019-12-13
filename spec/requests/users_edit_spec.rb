@@ -8,6 +8,7 @@ RSpec.describe "Users Edit", type: :request do
 
   describe "ログイン時" do
     before do
+      activate(user)
       log_in_as(user)
       get edit_user_path(user)
     end
@@ -68,7 +69,9 @@ RSpec.describe "Users Edit", type: :request do
   describe "異なるユーザーでログイン" do
     before do
       @user_a = FactoryBot.create(:user, name: "user_a", email: "user_a@mail.com")
+      activate(@user_a)
       @user_b = FactoryBot.create(:user, name: "user_b", email: "user_b@mail.com")
+      activate(@user_b)
       log_in_as(@user_a)
     end
 
@@ -96,6 +99,7 @@ RSpec.describe "Users Edit", type: :request do
 
   describe "フレンドリーフォアーディング" do
     example "ログアウト状態で編集画面へアクセスしリダイレクトしたログイン画面でログインすると編集画面へリダイレクトする" do
+      activate(user)
       get edit_user_path(user)
       expect(response).to redirect_to login_path
       follow_redirect!

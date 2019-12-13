@@ -12,6 +12,7 @@ RSpec.describe "Users Login", type: :request do
 
   describe "有効な情報でログイン" do
     before do
+      activate(user)
       get login_path
       expect(response).to render_template(:new)
       log_in_as(user)
@@ -40,6 +41,7 @@ RSpec.describe "Users Login", type: :request do
 
   describe "ログイン状態" do
     it "保持してログインするとクッキーに記憶トークンが保存される" do
+      activate(user)
       log_in_as(user, remember_me: "1")
       expect(response.cookies["remember_token"]).to_not be_empty
       expect(response.cookies["remember_token"]).to eq assigns(:user).remember_token

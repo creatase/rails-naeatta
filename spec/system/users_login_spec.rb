@@ -24,6 +24,7 @@ RSpec.describe "Users Login", type: :system do
   describe "有効な情報でログインボタンを押下" do
     before do
       @user = FactoryBot.create(:user)
+      activate(@user)
       visit login_path
       fill_in "Email", with: @user.email
       fill_in "Password", with: @user.password
