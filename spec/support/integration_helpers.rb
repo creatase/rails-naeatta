@@ -17,7 +17,6 @@ module IntegrationHelpers
 
   # テストユーザーを有効化する
   def activate(user)
-    user.update_attribute(:activated, true)
-    user.update_attribute(:activated_at, Time.zone.now)
+    user.update_attributes(activated: true, activated_at: Time.zone.now)
   end
 end
