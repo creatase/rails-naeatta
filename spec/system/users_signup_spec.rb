@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "Users Signup", type: :system do
+  before do
+    ActionMailer::Base.deliveries.clear
+  end
+
   describe "無効な情報で登録ボタンを押下する" do
     it "エラー内容が表示される" do
       visit signup_path
@@ -24,19 +28,29 @@ RSpec.describe "Users Signup", type: :system do
   end
 
   describe "有効な情報で登録ボタンを押下する" do
-    it "ユーザー詳細画面が表示される" do
+    let(:email) { "user@example.com" }
+    let(:password) { "password" }
+    before do
       visit signup_path
       fill_in "Name", with: "Example User"
-      fill_in "Email", with: "user@example.com"
-      fill_in "Password", with: "password"
-      fill_in "Confirmation", with: "password"
-
+      fill_in "Email", with: email
+      fill_in "Password", with: password
+      fill_in "Confirmation", with: password
       click_button "登録"
-      user = User.last
+    end
 
-      expect(current_path).to eq user_path(user)
-      expect(page).to have_content "Welcome to the Sample App!"
-      expect(page).to have_selector "a", text: "ログアウト"
+    it "アカウント有効化メールの確認を促すフラッシュを表示する" do
+      expect(page).to have_css ".alert-info", text: "アカウントを有効化するためのメールを送信しました。メールをご確認ください。"
+      expect(current_path).to eq root_path
+    end
+
+    it "有効化せずにログインするとホーム画面にリダイレクトする" do
+      visit login_path
+      fill_in "Email", with: email
+      fill_in "Password", with: password
+      click_button "ログイン"
+      expect(current_path).to eq root_path
+      expect(page).to_not have_selector "a", text: "ログアウト"
     end
   end
 end
