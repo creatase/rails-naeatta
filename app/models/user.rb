@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :seedlingsposts
+  has_many :seedlingsposts, dependent: :destroy
   attr_accessor :remember_token
   before_save { email.downcase! }
   validates :name,
