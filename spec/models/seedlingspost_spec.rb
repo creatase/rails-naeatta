@@ -2,7 +2,23 @@ require "rails_helper"
 
 RSpec.describe Seedlingspost, type: :model do
   let(:user) { FactoryBot.create(:user) }
-  let(:post) { FactoryBot.create(:seedlingspost, user: user) }
+  let(:params) {
+    {
+      user_id: 1,
+      item: "スイカ",
+      product_regulation: "9cmポット",
+      shipping_date: "2019-12-15",
+      scion: "夏味",
+      rootstock: "根張り",
+      count: 1,
+      location: "京都",
+      order_unit: 1,
+      remarks: "備考",
+    }
+  }
+  let(:post) { user.seedlingsposts.build(params) }
+  let(:second_post) { user.seedlingsposts.build(params) }
+  let(:most_recent_post) { FactoryBot.create(:seedlingspost, user: user) }
 
   describe "バリデーション" do
     context "有効な値で登録" do
@@ -49,6 +65,15 @@ RSpec.describe Seedlingspost, type: :model do
         post.order_unit = nil
         expect(post).to_not be_valid
       end
+    end
+  end
+
+  describe "投稿の順序" do
+    it "投稿日時が新しい順である" do
+      post
+      second_post
+      most_recent_post
+      expect(Seedlingspost.first).to eq most_recent_post
     end
   end
 end
