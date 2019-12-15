@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_005236) do
+ActiveRecord::Schema.define(version: 2019_12_15_043053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "seedlingsposts", force: :cascade do |t|
+    t.text "item"
+    t.text "product_regulation"
+    t.date "shipping_date"
+    t.text "scion"
+    t.text "rootstock"
+    t.integer "count"
+    t.text "location"
+    t.integer "order_unit"
+    t.text "remarks"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_seedlingsposts_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_seedlingsposts_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -26,4 +43,5 @@ ActiveRecord::Schema.define(version: 2019_12_11_005236) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "seedlingsposts", "users"
 end
