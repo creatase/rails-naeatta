@@ -1,0 +1,2 @@
+module SeedlingspostsHelper
+end

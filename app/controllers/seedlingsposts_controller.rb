@@ -1,0 +1,2 @@
+class SeedlingspostsController < ApplicationController
+end
