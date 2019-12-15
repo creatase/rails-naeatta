@@ -16,8 +16,7 @@ RSpec.describe Seedlingspost, type: :model do
       remarks: "備考",
     }
   }
-  let(:post) { user.seedlingsposts.build(params) }
-  let(:second_post) { user.seedlingsposts.build(params) }
+  let(:post) { user.seedlingsposts.create(params) }
   let(:most_recent_post) { FactoryBot.create(:seedlingspost, user: user) }
 
   describe "バリデーション" do
@@ -68,12 +67,14 @@ RSpec.describe Seedlingspost, type: :model do
     end
   end
 
-  describe "投稿の順序" do
-    it "投稿日時が新しい順である" do
-      post
-      second_post
-      most_recent_post
-      expect(Seedlingspost.first).to eq most_recent_post
-    end
+  it "投稿の順序投稿日時が新しい順である" do
+    post
+    most_recent_post
+    expect(Seedlingspost.first).to eq most_recent_post
+  end
+
+  it "ユーザーを削除したとき ユーザーのpostも削除する" do
+    post
+    expect { user.destroy }.to change { Seedlingspost.count }.by(-1)
   end
 end
