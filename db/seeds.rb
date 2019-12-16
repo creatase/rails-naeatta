@@ -17,3 +17,20 @@ User.create!(
     password_confirmation: password,
   )
 end
+
+params = {
+  item: "MyText",
+  product_regulation: "MyText",
+  shipping_date: "2019-12-15",
+  scion: "MyText",
+  rootstock: "MyText",
+  count: 1,
+  location: "MyText",
+  order_unit: 1,
+  remarks: "MyText",
+}
+
+users = User.order(:created_at).take(6)
+50.times do
+  users.each {|user| user.seedlingsposts.create!(params) }
+end
