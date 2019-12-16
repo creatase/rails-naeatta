@@ -5,3 +5,9 @@ div.row
       h1
         = image_tag('/images/kuro.jpg', alt: @user.name, class: "gravatar", size: '60x60')
         = @user.name
+  div.col-md-8
+    - if @user.seedlingsposts.any?
+      h3 "Seedlingspost (#{@user.seedlingsposts.count})"
+      ol.seedlingsposts
+        = render @seedlingsposts
+      = will_paginate @seedlingsposts

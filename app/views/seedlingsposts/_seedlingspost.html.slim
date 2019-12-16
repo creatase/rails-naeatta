@@ -1,0 +1,8 @@
+li id="seedlingspost-#{seedlingspost.id}"
+  = image_tag('/images/kuro.jpg', alt: seedlingspost.user.name, class: "gravatar", size: '50x50')
+  span.user
+    = link_to seedlingspost.user.name, seedlingspost.user
+  span.item
+    = seedlingspost.item
+  span.timestamp
+    = "Posted " + time_ago_in_words(seedlingspost.created_at) + " ago."
