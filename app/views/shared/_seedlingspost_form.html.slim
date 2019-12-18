@@ -1,0 +1,31 @@
+= form_for(@seedlingspost) do |f|
+  = render 'shared/error_messages', object: f.object
+  .field
+    = f.label :item, "品目名"
+    = f.text_field :item, placeholder: "例）トマト"
+
+    = f.label :product_regulation, "規格"
+    = f.text_field :product_regulation, placeholder: "例）９cmポット"
+
+    = f.label :shipping_date, "出荷予定日"
+    = f.date_select :shipping_date
+
+    = f.label :scion, "穂木"
+    = f.text_field :scion, placeholder: "品種名"
+
+    = f.label :rootstock, "台木"
+    = f.text_field :rootstock, placeholder: "（なし）"
+
+    = f.label :count, "本数"
+    = f.number_field :count, min: 1
+
+    = f.label :location, "生産地"
+    = f.text_field :location, placeholder: "都道府県"
+
+    = f.label :order_unit, "発注単位"
+    = f.number_field :order_unit, min: 1
+
+    = f.label :remarks, "備考"
+    = f.text_area :remarks, placeholder: "例）ポット色:赤"
+
+  = f.submit "登録", class: "btn btn-primary"

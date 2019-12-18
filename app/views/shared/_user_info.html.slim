@@ -1,0 +1,7 @@
+= image_tag('/images/kuro.jpg', alt: current_user.name, class: "gravatar", size: '60x60')
+h1
+  = current_user.name
+span
+  = link_to "view my profile", current_user
+span
+  = pluralize(current_user.seedlingsposts.count, "seedlingspost")
