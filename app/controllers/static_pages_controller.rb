@@ -1,6 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
-    @seedlingspost = current_user.seedlingsposts.build if logged_in?
+    if logged_in?
+      @seedlingspost = current_user.seedlingsposts.build
+      @feed_items = current_user.feed.paginate(page: params[:page])
+    end
   end
 
   def help

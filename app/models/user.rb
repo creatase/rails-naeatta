@@ -44,4 +44,9 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  # 試作feedの定義
+  def feed
+    Seedlingspost.where("user_id = ?", id)
+  end
 end

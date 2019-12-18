@@ -7,6 +7,7 @@ class SeedlingspostsController < ApplicationController
       flash[:succses] = "苗情報を投稿しました！"
       redirect_to root_url
     else
+      @feed_items = []
       render 'static_pages/home'
     end
   end
