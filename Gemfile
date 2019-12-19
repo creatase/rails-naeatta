@@ -66,11 +66,17 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
 end
 
+group :production do
+  gem 'fog', '1.42'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'slim-rails'
 gem 'html2slim'
 gem 'faker'
+gem 'carrierwave',             '1.2.2'
+gem 'mini_magick',             '4.7.0'
 gem 'will_paginate',           '3.1.7'
 gem 'will_paginate-bootstrap4', '~> 0.2.2'
