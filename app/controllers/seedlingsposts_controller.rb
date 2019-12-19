@@ -23,7 +23,7 @@ class SeedlingspostsController < ApplicationController
 
     def seedlingspost_params
       params.require(:seedlingspost).permit(
-        :item, :product_regulation, :shipping_date, :scion, :rootstock, :count, :location, :order_unit, :remarks
+        :item, :product_regulation, :shipping_date, :scion, :rootstock, :count, :location, :order_unit, :remarks, :picture
       )
     end
 

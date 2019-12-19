@@ -1,6 +1,7 @@
 class Seedlingspost < ApplicationRecord
   belongs_to :user
-  default_scope -> { order(created_at: :desc)}
+  default_scope -> { order(created_at: :desc) }
+  mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
   validates :item, presence: true
   validates :product_regulation, presence: true
