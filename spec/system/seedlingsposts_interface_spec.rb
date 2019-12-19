@@ -33,8 +33,9 @@ RSpec.describe "Seedlingsposts", type: :system do
 
   describe "有効な情報を送信" do
     example "苗情報が表示される" do
+      visit root_path
+      expect(page).to have_selector "#seedlingspost_picture"
       expect {
-        visit root_path
         fill_in "品目名", with: "スイカ"
         fill_in "規格", with: "９cmポット"
         fill_in "穂木", with: "夏美"
@@ -42,6 +43,7 @@ RSpec.describe "Seedlingsposts", type: :system do
         fill_in "本数", with: "100"
         fill_in "生産地", with: "東京"
         fill_in "発注単位", with: "10"
+        attach_file "苗の状態", "#{Rails.root}/spec/factories/seedlings_image.jpg"
         click_button "登録"
       }.to change { Seedlingspost.count }.by(1)
 
