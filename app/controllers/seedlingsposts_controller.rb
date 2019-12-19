@@ -5,7 +5,7 @@ class SeedlingspostsController < ApplicationController
   def create
     @seedlingspost = current_user.seedlingsposts.build(seedlingspost_params)
     if @seedlingspost.save
-      flash[:succses] = "苗情報を投稿しました！"
+      flash[:success] = "苗情報を投稿しました！"
       redirect_to root_url
     else
       @feed_items = []
