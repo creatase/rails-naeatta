@@ -6,3 +6,5 @@ li id="seedlingspost-#{seedlingspost.id}"
     = seedlingspost.item
   span.timestamp
     = "Posted " + time_ago_in_words(seedlingspost.created_at) + " ago."
+    - if current_user?(seedlingspost.user)
+      = link_to "削除", seedlingspost, method: :delete, data: { confirm: "この苗情報を削除しますか？" }
