@@ -10,4 +10,14 @@ class Seedlingspost < ApplicationRecord
   validates :count, presence: true
   validates :location, presence: true
   validates :order_unit, presence: true
+  validate :picture_size
+
+  private
+
+    # アップロードされた画像のサイズをバリデーションする
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "アップロードできるファイルサイズは5MB以下です。")
+      end
+    end
 end
