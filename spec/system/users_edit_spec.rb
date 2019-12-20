@@ -15,6 +15,7 @@ RSpec.describe "Users Edit", type: :system do
       fill_in "Email", with: "foo@bar.com"
       fill_in "Password", with: ""
       fill_in "Confirmation", with: ""
+      attach_file "ユーザーアイコン", "#{Rails.root}/spec/factories/icon_image.png"
       click_button "更新"
 
       expect(current_path).to eq user_path(user)
