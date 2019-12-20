@@ -1,7 +1,4 @@
-- if current_user.icon?
-  = image_tag current_user.icon.url
--else
-  = image_tag('/images/kuro.jpg', alt: current_user.name, class: "gravatar", size: '60x60')
+= render 'shared/user_icon', object: current_user
 h1
   = current_user.name
 span

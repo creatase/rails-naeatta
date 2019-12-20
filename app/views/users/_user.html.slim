@@ -1,9 +1,6 @@
-    li
-      - if user.icon?
-        = image_tag user.icon.url
-      -else
-        = image_tag('/images/kuro.jpg', alt: user.name, class: "gravatar", size: '60x60')
-      = link_to user.name, user
-      - if current_user.admin? && !current_user?(user)
-        |  | 
-        = link_to "削除", user, method: :delete, data: { confirm: "本当に削除しますか?" }
+li
+  = render 'shared/user_icon', object: user
+  = link_to user.name, user
+  - if current_user.admin? && !current_user?(user)
+    |  | 
+    = link_to "削除", user, method: :delete, data: { confirm: "本当に削除しますか?" }

@@ -5,9 +5,6 @@ h1 プロフィール編集
 
 .row
   .col-md-12.col-md-offset-3
-    .gravatar_edit
-      - if @user.icon?
-        = image_tag @user.icon.url
-      -else
-        = image_tag('/images/kuro.jpg', alt: @user.name, class: "gravatar", size: '60x60')
+    .user_icon_edit
+      = render 'shared/user_icon', object: @user
     = render 'form'
