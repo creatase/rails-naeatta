@@ -1,11 +1,14 @@
 li id="seedlingspost-#{seedlingspost.id}"
-  = image_tag('/images/kuro.jpg', alt: seedlingspost.user.name, class: "gravatar", size: '50x50')
+  - if seedlingspost.user.icon?
+    = image_tag seedlingspost.user.icon.url
+  -else
+    = image_tag('/images/kuro.jpg', alt: seedlingspost.user.name, class: "gravatar", size: '60x60')
   span.user
     = link_to seedlingspost.user.name, seedlingspost.user
   span.item
     = seedlingspost.item
     = image_tag seedlingspost.picture.url if seedlingspost.picture?
   span.timestamp
-    = "Posted " + time_ago_in_words(seedlingspost.created_at) + " ago."
+    = "Posted " + time_ago_in_words(seedlingspost.created_at) + " ago. "
     - if current_user?(seedlingspost.user)
       = link_to "削除", seedlingspost, method: :delete, data: { confirm: "この苗情報を削除しますか？" }

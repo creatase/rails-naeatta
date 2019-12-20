@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :seedlingsposts, dependent: :destroy
   attr_accessor :remember_token
   before_save { email.downcase! }
+  mount_uploader :icon, UserIconUploader
   validates :name,
             presence: true,
             length: { maximum: 50 }
@@ -15,6 +16,7 @@ class User < ApplicationRecord
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validate :icon_size
 
   # 渡された文字列のハッシュ値を返す
   def self.digest(string)
@@ -49,4 +51,13 @@ class User < ApplicationRecord
   def feed
     Seedlingspost.where("user_id = ?", id)
   end
+
+  private
+
+    # アップロードされた画像のサイズをバリデーションする
+    def icon_size
+      if icon.size > 5.megabytes
+        errors.add(:icon, "アップロードできるファイルサイズは5MB以下です。")
+      end
+    end
 end
