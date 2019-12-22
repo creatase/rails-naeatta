@@ -28,4 +28,27 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "GET #following" do
+    it "returns http success" do
+      get :following, params: { id: user.id }
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(login_url)
+
+      log_in_as(user)
+      get :following, params: { id: user.id }
+      expect(response).to have_http_status(:success)
+    end
+  end
+  describe "GET #followers" do
+    it "returns http success" do
+      get :followers, params: { id: user.id }
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(login_url)
+
+      log_in_as(user)
+      get :followers, params: { id: user.id }
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

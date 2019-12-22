@@ -1,0 +1,24 @@
+- provide(:title, @title)
+.row
+  aside.col-md-4
+    section.user_info
+      = render 'shared/user_icon', object: @user
+      h1 = @user.name
+      span
+        = link_to "view my profile", @user
+      span
+        b 苗情報: 
+        = @user.seedlingsposts.count
+    section.stats
+      = render 'shared/stats'
+      - if @users.any?
+        .user_avatars
+          - @users.each do |user|
+            = link_to((render 'shared/user_icon', object: user), user)
+  div.col-md-8
+    h3
+      = @title
+    - if @users.any?
+      ul.users.follow
+        = render @users
+      = will_paginate
