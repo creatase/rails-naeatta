@@ -5,7 +5,10 @@ div.row
       h1
         = render 'shared/user_icon', object: @user
         = @user.name
+    section.stats
+      = render 'shared/stats'
   div.col-md-8
+    = render 'follow_form' if logged_in?
     - if @user.seedlingsposts.any?
       h3 "Seedlingspost (#{@user.seedlingsposts.count})"
       ol.seedlingsposts
