@@ -85,5 +85,5 @@ test:
 production:
   <<: *default
   database: rails_atta_production
-  username: rails_atta
-  password: <%= ENV['RAILS_ATTA_DATABASE_PASSWORD'] %>
+  # username: rails_atta
+  # password: <%= ENV['RAILS_ATTA_DATABASE_PASSWORD'] %>
