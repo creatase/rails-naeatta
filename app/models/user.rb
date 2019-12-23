@@ -53,7 +53,7 @@ class User < ApplicationRecord
 
   # 試作feedの定義
   def feed
-    Seedlingspost.where("user_id = ?", id)
+    Seedlingspost.where("user_id IN (?) OR user_id = ?", following_ids, id)
   end
 
   # ユーザーをフォローする

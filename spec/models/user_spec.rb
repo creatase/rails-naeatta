@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe User, type: :model do
   let(:user) { FactoryBot.create(:user) }
   let(:other_user) { FactoryBot.create(:user, name: "other", email: "other@mail.com") }
+  let(:follow_user) { FactoryBot.create(:user, name: "follow", email: "follow@mail.com") }
+  let(:unfollow_user) { FactoryBot.create(:user, name: "unfollow", email: "unfollow@mail.com") }
 
   describe "バリデーション" do
     describe "params nameが" do
@@ -154,5 +156,26 @@ RSpec.describe User, type: :model do
     expect(other_user.followers.include?(user)).to be_truthy
     user.unfollow(other_user)
     expect(user.following?(other_user)).to be_falsey
+  end
+
+  describe "ステータスフィード" do
+    before do
+      @user_post = FactoryBot.create(:seedlingspost, user: user)
+      @follow_user_post = FactoryBot.create(:seedlingspost, user: follow_user)
+      @unfollow_user_post = FactoryBot.create(:seedlingspost, user: unfollow_user)
+      user.follow(follow_user)
+    end
+
+    it "フォローしているユーザーの投稿が含まれている" do
+      expect(user.feed.include?(@follow_user_post)).to be_truthy
+    end
+
+    it "自分の投稿が含まれている" do
+      expect(user.feed.include?(@user_post)).to be_truthy
+    end
+
+    it "フォローしていないユーザーの投稿が含まれない" do
+      expect(user.feed.include?(@unfollow_user_post)).to be_falsey
+    end
   end
 end
