@@ -6,16 +6,14 @@
 * Ruby version 2.5.7
 
 ### Description
-Qiita の機能の一部を真似て作成しました。
+Railsチュートリアルを参考にしつつ、Docker、Rspec、CircleCI、Slimなどをキャッチアップしながら開発
 
 ### 機能一覧
 
 * ユーザー登録、ログイン、ログアウト
-* 余剰苗一覧表示
-* 余剰苗情報編集、削除
-* マイページ一覧表示
-API は Rails、フロントは React で作成しました。
+* ユーザー一覧表示
+* 余剰苗情報投稿
+* マイページ表示
+* ユーザーフォロー、フォロー解除
 
-model、API のテスト実装しています。 heroku へのデプロイも行いました。 https://rails-naeatta.herokuapp.com/
-
-## Demo
+heroku へのデプロイも行いました。 https://rails-naeatta.herokuapp.com/
