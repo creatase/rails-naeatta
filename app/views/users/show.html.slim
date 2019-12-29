@@ -1,4 +1,6 @@
-- provide(:title, @user.name)
+- provide(:title, "#{current_user?(@user) ? 'マイページ' : @user.name}")
+- if current_user?(@user)
+  h1 マイページ
 div.row
   aside.col-md-4
     section.user_info
@@ -10,7 +12,7 @@ div.row
   div.col-md-8
     = render 'follow_form' if logged_in?
     - if @user.seedlingsposts.any?
-      h3 "Seedlingspost (#{@user.seedlingsposts.count})"
+      h3 苗情報 (#{@user.seedlingsposts.count}件)
       ol.seedlingsposts
         = render @seedlingsposts
       = will_paginate @seedlingsposts

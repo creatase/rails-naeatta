@@ -8,8 +8,8 @@ RSpec.describe "Seedlingsposts", type: :system do
 
   before do
     visit login_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
+    fill_in "メールアドレス", with: user.email
+    fill_in "パスワード", with: user.password
     click_button "ログイン"
   end
 
@@ -68,9 +68,9 @@ RSpec.describe "Seedlingsposts", type: :system do
 
   example "投稿するとユーザー名下の投稿数が１つ増える" do
     visit root_path
-    expect(page).to have_content "0 seedlingsposts"
+    expect(page).to have_content "0 投稿"
     post
     visit root_path
-    expect(page).to have_content "1 seedlingspost"
+    expect(page).to have_content "1 投稿"
   end
 end

@@ -8,8 +8,8 @@ RSpec.describe "Following", type: :system do
 
   before do
     visit login_path
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
+    fill_in "メールアドレス", with: user.email
+    fill_in "パスワード", with: user.password
     click_button "ログイン"
   end
 
@@ -18,7 +18,7 @@ RSpec.describe "Following", type: :system do
       follow
       visit following_user_path(user)
       expect(user.following).to_not be_empty
-      expect(page).to have_link user.following.count.to_s + "following"
+      expect(page).to have_link user.following.count.to_s + "フォロー"
       user.following.each do |follow_user|
         expect(page).to have_link follow_user.name, href: user_path(follow_user)
       end
@@ -30,7 +30,7 @@ RSpec.describe "Following", type: :system do
       followed
       visit followers_user_path(user)
       expect(user.followers).to_not be_empty
-      expect(page).to have_link user.followers.count.to_s + "followers"
+      expect(page).to have_link user.followers.count.to_s + "フォロワー"
       user.followers.each do |follower|
         expect(page).to have_link follower.name, href: user_path(follower)
       end

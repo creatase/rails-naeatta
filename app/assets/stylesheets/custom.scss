@@ -271,6 +271,9 @@ input {
     color: $gray-light;
     display: block;
     margin-left: 60px;
+    .delete {
+      margin-left: 10px;
+    }
   }
   .user_icon {
     float: left;

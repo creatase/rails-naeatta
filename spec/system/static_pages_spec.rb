@@ -7,9 +7,9 @@ RSpec.describe "Static Pages", type: :system do
     it "各ページへのリンクがある" do
       visit "/"
       expect(page).to have_link nil, href: root_path, count: 2
-      expect(page).to have_link "Help", href: help_path
-      expect(page).to have_link "About", href: about_path
-      expect(page).to have_link "Contact", href: contact_path
+      expect(page).to have_link "ヘルプ", href: help_path
+      expect(page).to have_link "使い方", href: about_path
+      expect(page).to have_link "問合せ", href: contact_path
     end
   end
 
@@ -20,7 +20,7 @@ RSpec.describe "Static Pages", type: :system do
     context "画面を表示したとき" do
       it "titleは naeatta のみ" do
         expect(page).to have_title base_title
-        expect(page).to_not have_title "Home |"
+        expect(page).to_not have_title "ホーム |"
       end
       it "新規登録のリンクがある" do
         expect(page).to have_link "新規登録", href: signup_path
@@ -30,19 +30,19 @@ RSpec.describe "Static Pages", type: :system do
   describe "About" do
     it "画面の表示" do
       visit "/about"
-      expect(page).to have_title "About | #{base_title}"
+      expect(page).to have_title "使い方 | #{base_title}"
     end
   end
   describe "Help" do
     it "画面の表示" do
       visit "/help"
-      expect(page).to have_title "Help | #{base_title}"
+      expect(page).to have_title "ヘルプ | #{base_title}"
     end
   end
   describe "Contact" do
     it "画面の表示" do
       visit "/contact"
-      expect(page).to have_title "Contact | #{base_title}"
+      expect(page).to have_title "問合せ | #{base_title}"
     end
   end
 end

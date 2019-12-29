@@ -4,8 +4,8 @@ RSpec.describe "Users Login", type: :system do
   describe "無効な情報でログインボタンを押下" do
     before do
       visit login_path
-      fill_in "Email", with: "user@invalid"
-      fill_in "Password", with: "foo"
+      fill_in "メールアドレス", with: "user@invalid"
+      fill_in "パスワード", with: "foo"
       click_button "ログイン"
     end
 
@@ -25,24 +25,24 @@ RSpec.describe "Users Login", type: :system do
     before do
       @user = FactoryBot.create(:user)
       visit login_path
-      fill_in "Email", with: @user.email
-      fill_in "Password", with: @user.password
+      fill_in "メールアドレス", with: @user.email
+      fill_in "パスワード", with: @user.password
       click_button "ログイン"
     end
 
     it "ユーザー詳細ページを表示する" do
       expect(current_path).to eq user_path(@user)
-      expect(page).to_not have_selector "a", text: "Log in"
+      expect(page).to_not have_selector "a", text: "ログイン"
       expect(page).to have_selector "a", text: "ログアウト"
-      expect(page).to have_selector "a", text: "Profile"
+      expect(page).to have_selector "a", text: "マイページ"
     end
 
     it "ログアウトボタンを押すとホーム画面を表示" do
       click_link "ログアウト"
       expect(current_path).to eq root_path
-      expect(page).to have_selector "a", text: "Log in"
+      expect(page).to have_selector "a", text: "ログイン"
       expect(page).to_not have_selector "a", text: "ログアウト"
-      expect(page).to_not have_selector "a", text: "Profile"
+      expect(page).to_not have_selector "a", text: "マイページ"
     end
   end
 end

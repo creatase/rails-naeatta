@@ -16,8 +16,8 @@ RSpec.describe "Users Index", type: :system do
   describe "管理者ログイン" do
     before do
       visit login_path
-      fill_in "Email", with: @admin.email
-      fill_in "Password", with: "password"
+      fill_in "メールアドレス", with: @admin.email
+      fill_in "パスワード", with: "password"
       click_button "ログイン"
       visit users_path
     end
@@ -45,8 +45,8 @@ RSpec.describe "Users Index", type: :system do
   describe "管理者意外でログイン" do
     example "削除リンクが表示されない" do
       visit login_path
-      fill_in "Email", with: @non_admin.email
-      fill_in "Password", with: "password"
+      fill_in "メールアドレス", with: @non_admin.email
+      fill_in "パスワード", with: "password"
       click_button "ログイン"
 
       visit users_path
