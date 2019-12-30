@@ -150,6 +150,7 @@ aside {
   overflow: auto;
   margin-top: 0;
   padding: 0;
+  margin-bottom: 15px;
   a {
     float: left;
     padding: 0 10px;
@@ -261,7 +262,7 @@ input {
   }
   .item {
     display: block;
-    margin-left: 60px;
+    text-align: left;
     img {
       display: block;
       padding: 5px 0;
@@ -272,6 +273,9 @@ input {
     display: block;
     margin-left: 60px;
     .delete {
+      margin-left: 10px;
+    }
+    .detail {
       margin-left: 10px;
     }
   }
