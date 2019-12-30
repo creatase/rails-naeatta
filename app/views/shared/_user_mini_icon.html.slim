@@ -1,0 +1,4 @@
+- if object.icon?
+  = image_tag(object.icon.url, alt: object.name, class: "user_mini_icon", size: '30x30')
+-else
+  = image_tag('/images/kuro.jpg', alt: object.name, class: "user_mini_icon", size: '30x30')
