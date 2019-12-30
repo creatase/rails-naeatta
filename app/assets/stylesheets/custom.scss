@@ -33,10 +33,6 @@ textarea {
   }
 }
 
-section {
-  margin-bottom: 40px;
-}
-
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -317,4 +313,10 @@ span.picture {
     color: white;
     text-shadow: 0 0 10px black;
   }
+}
+
+/* About */
+
+.about-section {
+  margin-bottom: 40px;
 }
