@@ -1,3 +1,4 @@
+- provide(:posts, @feed_items)
 - if logged_in?
   .row
     aside.col-md-4
@@ -8,7 +9,7 @@
       section.seedlingspost_form
         = render 'shared/seedlingspost_form'
     .col-md-8
-      h3 最新苗情報
+      h3 フィード
       = render 'shared/feed'
 - else
   .center.jumbotron

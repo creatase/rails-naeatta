@@ -19,7 +19,7 @@ RSpec.describe "Users Edit", type: :system do
       click_button "更新"
 
       expect(current_path).to eq user_path(user)
-      expect(page).to have_content "Profile updated"
+      expect(page).to have_content "プロフィールが更新されました"
     end
   end
 

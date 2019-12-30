@@ -1,0 +1,13 @@
+- provide(:title, '余剰苗一覧')
+.row
+  aside.col-md-4
+    section.user_info
+      = render 'shared/user_info'
+    section.stats
+      = render 'shared/stats'
+  .col-md-8
+    h3 余剰苗情報一覧
+    - if @seedlingsposts.any?
+      ol.seedlingsposts
+        = render @seedlingsposts
+      = will_paginate @seedlingsposts

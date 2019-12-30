@@ -35,7 +35,7 @@ RSpec.describe "Users Signup", type: :system do
       user = User.last
 
       expect(current_path).to eq user_path(user)
-      expect(page).to have_content "Welcome to the Sample App!"
+      expect(page).to have_content "naeatta!へようこそ!"
       expect(page).to have_selector "a", text: "ログアウト"
     end
   end

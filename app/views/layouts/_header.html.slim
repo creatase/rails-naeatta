@@ -5,6 +5,7 @@ header.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
       = link_to "ホーム", root_path, class: "p-2 text-dark"
       = link_to "使い方", about_path, class: "p-2 text-dark"
       - if logged_in?
+        = link_to "苗検索", seedlingsposts_path, class: "p-2 text-dark"
         = link_to "育苗者", users_path, class: "p-2 text-dark"
         a.dropdown-toggle.p-2.text-dark href="#" data-toggle="dropdown" アカウント
         .dropdown-menu
