@@ -16,7 +16,7 @@ RSpec.describe "Seedlingsposts", type: :system do
   describe "無効な情報を送信" do
     example "苗情報が表示される" do
       expect {
-        visit root_path
+        visit new_seedlingspost_path
         fill_in "品目名", with: ""
         fill_in "規格", with: ""
         fill_in "穂木", with: ""
@@ -33,7 +33,7 @@ RSpec.describe "Seedlingsposts", type: :system do
 
   describe "有効な情報を送信" do
     example "苗情報が表示される" do
-      visit root_path
+      visit new_seedlingspost_path
       expect(page).to have_selector "#seedlingspost_picture"
       expect {
         fill_in "品目名", with: "スイカ"
@@ -47,7 +47,7 @@ RSpec.describe "Seedlingsposts", type: :system do
         click_button "登録"
       }.to change { Seedlingspost.count }.by(1)
 
-      expect(current_path).to eq root_path
+      expect(current_path).to eq seedlingsposts_path
       expect(page).to have_content "スイカ"
     end
   end

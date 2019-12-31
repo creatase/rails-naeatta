@@ -6,14 +6,17 @@ class SeedlingspostsController < ApplicationController
     @seedlingsposts = Seedlingspost.paginate(page: params[:page])
   end
 
+  def new
+    @seedlingspost = Seedlingspost.new
+  end
+
   def create
     @seedlingspost = current_user.seedlingsposts.build(seedlingspost_params)
     if @seedlingspost.save
       flash[:success] = "苗情報を投稿しました！"
-      redirect_to root_url
+      redirect_to seedlingsposts_path
     else
-      @feed_items = []
-      render "static_pages/home"
+      render "seedlingsposts/new"
     end
   end
 

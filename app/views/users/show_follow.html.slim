@@ -9,7 +9,7 @@
       span
         b 苗情報: 
         = @user.seedlingsposts.count
-    section.stats
+    section.stats_section
       = render 'shared/stats'
       - if @users.any?
         .user_avatars

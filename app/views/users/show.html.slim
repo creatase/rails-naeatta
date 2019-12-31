@@ -7,7 +7,7 @@ div.row
       h1
         = render 'shared/user_icon', object: @user
         = @user.name
-    section.stats
+    section.stats_section
       = render 'shared/stats'
   div.col-md-8
     = render 'follow_form' if logged_in?

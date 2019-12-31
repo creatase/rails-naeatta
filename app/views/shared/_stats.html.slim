@@ -1,5 +1,5 @@
 - @user ||= current_user
-div.stats
+.stats
   a href="#{following_user_path(@user)}"
     strong#following.stat
       = @user.following.count
@@ -8,3 +8,5 @@ div.stats
     strong#followers.stat
       = @user.followers.count
     'フォロワー
+- if current_user?(@user) && request.url != post_url
+  = link_to "苗情報を投稿する", post_path, class: "btn btn-lg btn-primary"

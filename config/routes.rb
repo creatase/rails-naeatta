@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  resources :seedlingsposts, only: [:index, :create, :destroy]
+  get "/post", to: "seedlingsposts#new"
+  post "/post", to: "seedlingsposts#create"
+  resources :seedlingsposts
+
   resources :relationships, only: [:create, :destroy]
 end

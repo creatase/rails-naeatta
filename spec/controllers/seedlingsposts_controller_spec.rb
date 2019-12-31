@@ -6,6 +6,13 @@ RSpec.describe SeedlingspostsController, type: :controller do
   let!(:other_user) { FactoryBot.create(:user, name: "other", email: "other@mail.com") }
   let!(:other_seedlingspost) { FactoryBot.create(:seedlingspost, user: other_user) }
 
+  describe "GET #new" do
+    it "returns http success" do
+      get :new
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "ログアウト時" do
     it "苗情報を投稿できない" do
       post :create, params: {
