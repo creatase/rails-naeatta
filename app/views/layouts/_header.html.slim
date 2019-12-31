@@ -3,7 +3,6 @@ header.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
     = link_to "naeatta!", root_path, id: "logo", class: "my-0 mr-md-auto font-weight-bold"
     nav.my-2.my-md-0
       = link_to "ホーム", root_path, class: "p-2 text-dark"
-      = link_to "使い方", about_path, class: "p-2 text-dark"
       - if logged_in?
         = link_to "苗検索", seedlingsposts_path, class: "p-2 text-dark"
         = link_to "育苗者", users_path, class: "p-2 text-dark"
@@ -11,6 +10,8 @@ header.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
         .dropdown-menu
           = link_to "マイページ", current_user, class: "dropdown-item p-2 text-dark"
           = link_to "設定変更", edit_user_path(current_user), class: "dropdown-item p-2 text-dark"
-        = link_to "ログアウト", logout_path, method: :delete, class: "btn btn-outline-primary ml-2"
+          = link_to "使い方", about_path, class: "dropdown-item p-2 text-dark"
+          = link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item p-2 text-dark"
       - else
+        = link_to "使い方", about_path, class: "p-2 text-dark"
         = link_to "ログイン", login_path, class: "btn btn-outline-primary ml-2"
