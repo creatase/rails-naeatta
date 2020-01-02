@@ -3,7 +3,8 @@ class SeedlingspostsController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def index
-    @seedlingsposts = Seedlingspost.paginate(page: params[:page])
+    @q = Seedlingspost.ransack(params[:q])
+    @seedlingsposts = @q.result.page(params[:page])
   end
 
   def new

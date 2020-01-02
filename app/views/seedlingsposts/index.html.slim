@@ -1,4 +1,13 @@
 - provide(:title, '余剰苗一覧')
+= search_form_for @q do |f|
+  .row
+    = f.label :item_cont, "品目", class: "col-sm-1 col-form-label"
+    .col-sm-5
+      = f.search_field :item_cont, class: "form-control"
+    = f.label :scion_cont, "品種", class: "col-sm-1 col-form-label"
+    .col-sm-5
+      = f.search_field :scion_cont, class: "form-control"
+  = f.submit "検索", class: "btn btn-outline-primary"
 .row
   aside.col-md-4
     section.user_info
