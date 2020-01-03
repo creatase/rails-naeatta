@@ -1,5 +1,5 @@
 class SeedlingspostsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :create, :destroy]
+  before_action :logged_in_user, only: [:new, :index, :create, :destroy]
   before_action :correct_user, only: :destroy
 
   def index
@@ -8,7 +8,7 @@ class SeedlingspostsController < ApplicationController
   end
 
   def new
-    @seedlingspost = Seedlingspost.new
+    @seedlingspost = current_user.seedlingsposts.build
   end
 
   def create
