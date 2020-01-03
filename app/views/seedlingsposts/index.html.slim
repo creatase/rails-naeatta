@@ -16,6 +16,10 @@
       = render 'shared/stats'
   .col-md-8
     h3 余剰苗情報一覧
+    .sort-section
+      'ソート
+      = sort_link(@q, :count)
+      = sort_link(@q, :shipping_date)
     - if @seedlingsposts.any?
       ol.seedlingsposts
         = render @seedlingsposts
