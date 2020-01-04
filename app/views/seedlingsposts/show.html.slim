@@ -1,0 +1,70 @@
+- provide(:title, "苗詳細")
+h1 苗詳細
+.row
+  aside.col-md-4
+    section.user_info
+      h1
+        = render 'shared/user_icon', object: current_user
+        = current_user.name
+    section.stats_section
+      = render 'shared/stats'
+  div.col-md-8
+    .detail-section
+      h3 苗情報
+      .row
+        span.item.col-12
+          = image_tag @seedlingspost.picture.url if @seedlingspost.picture?
+      table
+        tr
+          th 品目
+          td
+            = @seedlingspost.item
+        tr
+          th 規格
+          td
+            = @seedlingspost.product_regulation
+        tr
+          th 出荷予定日
+          td
+            = @seedlingspost.shipping_date
+        tr
+          th 穂木
+          td
+            = @seedlingspost.scion
+        tr
+          th 台木
+          td
+            = @seedlingspost.rootstock
+        tr
+          th 余剰本数
+          td
+            = @seedlingspost.count
+        tr
+          th 生産地
+          td
+            = @seedlingspost.location
+        tr
+          th 発注単位
+          td
+            = @seedlingspost.order_unit
+        tr
+          th 備考
+          td
+            = @seedlingspost.remarks
+    .detail-section
+      h3 生産者情報
+      table
+        tr
+          th 名前
+          td
+            = @seedlingspost.user.name
+            = link_to "このユーザーの苗一覧", user_path(@seedlingspost.user)
+        tr
+          th 所在地
+          td ---
+        tr
+          th Webサイト
+          td ---
+        tr
+          th 取引先
+          td ---

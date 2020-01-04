@@ -307,6 +307,19 @@ span.picture {
   }
 }
 
+.detail-section {
+  margin-bottom: 30px;
+  h3 {
+    border-bottom: 1px solid $gray-lighter;
+  }
+  tr {
+    border-bottom: 1px solid $gray-lighter;
+  }
+  a {
+    padding-left: 10px;
+  }
+}
+
 /* home */
 .jumbotron {
   background-image: url("/images/home_bg.jpg");

@@ -1,10 +1,14 @@
 class SeedlingspostsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :index, :create, :destroy]
+  before_action :logged_in_user, only: [:new, :index, :show, :create, :destroy]
   before_action :correct_user, only: :destroy
 
   def index
     @q = Seedlingspost.ransack(params[:q])
     @seedlingsposts = @q.result.page(params[:page])
+  end
+
+  def show
+    @seedlingspost = Seedlingspost.find(params[:id])
   end
 
   def new

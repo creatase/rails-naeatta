@@ -2,6 +2,7 @@ li id="seedlingspost-#{seedlingspost.id}"
   = render 'shared/user_icon', object: seedlingspost.user
   span.user
     = link_to seedlingspost.user.name, seedlingspost.user
+    = " 苗の画像あり" if seedlingspost.picture?
   .row
     span.item.col-xs-12.col-md-4
       '品目:
@@ -16,11 +17,8 @@ li id="seedlingspost-#{seedlingspost.id}"
     span.item.col-xs-12.col-md-8
       '出荷予定日:
       = seedlingspost.shipping_date
-  .row
-    span.item.col-12
-      = image_tag seedlingspost.picture.url if seedlingspost.picture?
   span.timestamp
     = time_ago_in_words(seedlingspost.created_at) + "前に投稿"
-    = link_to "詳細", "#", class: "detail"
+    = link_to "詳細", seedlingspost, class: "detail"
     - if current_user?(seedlingspost.user)
       = link_to "削除", seedlingspost, class: "delete", method: :delete, data: { confirm: "この苗情報を削除しますか？" }

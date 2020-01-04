@@ -14,6 +14,14 @@ RSpec.describe SeedlingspostsController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    it "returns http success" do
+      log_in_as(user)
+      get :show, params: {id: seedlingspost.id}
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "ログアウト時" do
     it "苗情報を投稿できない" do
       post :create, params: {
